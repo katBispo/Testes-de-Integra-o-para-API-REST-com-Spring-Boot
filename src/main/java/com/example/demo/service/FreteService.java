@@ -1,4 +1,5 @@
 package com.example.demo.service;
+import com.example.demo.exception.FreteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.repository.*;
@@ -21,12 +22,13 @@ public class FreteService {
 
     public Frete cadastrarFrete(Frete frete) {
         if (frete.getCliente() == null || !clienteRepository.existsById(frete.getCliente().getCodigoCliente())) {
-            throw new IllegalArgumentException("Cliente não cadastrado");
+            throw new FreteException("Cliente não cadastrado");
         }
 
         if (frete.getCidade() == null || !cidadeRepository.existsById(frete.getCidade().getCodigo())) {
-            throw new IllegalArgumentException("Cidade não cadastrada");
+            throw new FreteException("Cidade não cadastrada");
         }
+
 
         float valorCalculado = frete.getPeso() * VALOR_FIXO + frete.getCidade().getTaxa();
         frete.setValor(valorCalculado);

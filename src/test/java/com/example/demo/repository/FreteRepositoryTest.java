@@ -34,7 +34,7 @@ public class FreteRepositoryTest {
         cliente = new Cliente();
         cliente.setNome("Ana");
         cliente.setEndereco("Av. Central");
-        cliente.setTelefone("11223344");
+        cliente.setTelefone("(11) 91234-5678");
         cliente = clienteRepository.save(cliente);
 
         cidade = new Cidade();

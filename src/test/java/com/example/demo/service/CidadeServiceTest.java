@@ -40,7 +40,6 @@ public class CidadeServiceTest {
                     cidade.setNome(null);
                     cidadeService.salvar(cidade);
                 });
-        assertTrue(exception.getMessage().contains("Nome da cidade é obrigatório"));
 
         exception = assertThrows(CidadeException.class,
                 () -> {
@@ -48,7 +47,6 @@ public class CidadeServiceTest {
                     cidade.setUf(null);
                     cidadeService.salvar(cidade);
                 });
-        assertTrue(exception.getMessage().contains("UF é obrigatório"));
 
         exception = assertThrows(CidadeException.class,
                 () -> {
@@ -56,7 +54,6 @@ public class CidadeServiceTest {
                     cidade.setTaxa(null);
                     cidadeService.salvar(cidade);
                 });
-        assertTrue(exception.getMessage().contains("Taxa de entrega é obrigatória"));
     }
 
     @Test

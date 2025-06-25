@@ -1,4 +1,7 @@
 package com.example.demo.service;
+import com.example.demo.exception.CidadeException;
+import com.example.demo.exception.ClienteException;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.repository.*;
@@ -13,7 +16,13 @@ public class CidadeService {
     private CidadeRepository cidadeRepository;
 
     public Cidade salvar(Cidade cidade) {
-        return cidadeRepository.save(cidade);
+        try {
+            return cidadeRepository.save(cidade);
+        }catch (ConstraintViolationException e) {
+            throw new CidadeException(
+                    e.getConstraintViolations().stream().map(v -> v.getMessage()).findFirst().orElse("Dados inválidos")
+            );
+        }
     }
 
     public Optional<Cidade> buscarPorNome(String nome) {

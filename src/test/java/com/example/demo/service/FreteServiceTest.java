@@ -43,7 +43,7 @@ public class FreteServiceTest {
         cliente = new Cliente();
         cliente.setNome("João");
         cliente.setEndereco("Rua A");
-        cliente.setTelefone("999999999");
+        cliente.setTelefone("(11) 91234-5678");
         clienteRepository.save(cliente);
 
         cidade = new Cidade();

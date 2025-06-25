@@ -21,7 +21,7 @@ public class ClienteRepositoryTest {
         Cliente cliente = new Cliente();
         cliente.setNome("João");
         cliente.setEndereco("Rua A");
-        cliente.setTelefone("999999999");
+        cliente.setTelefone("(11) 91234-5678");
 
         Cliente salvo = clienteRepository.save(cliente);
         assertNotNull(salvo.getCodigoCliente());
@@ -41,10 +41,10 @@ public class ClienteRepositoryTest {
         Cliente cliente = new Cliente();
         cliente.setNome("Maria");
         cliente.setEndereco("Rua B");
-        cliente.setTelefone("123456789");
+        cliente.setTelefone("(11) 91234-5678");
         clienteRepository.save(cliente);
 
-        Optional<Cliente> resultado = clienteRepository.findByTelefone("123456789");
+        Optional<Cliente> resultado = clienteRepository.findByTelefone("(11) 91234-5678");
         assertTrue(resultado.isPresent());
         assertEquals("Maria", resultado.get().getNome());
     }

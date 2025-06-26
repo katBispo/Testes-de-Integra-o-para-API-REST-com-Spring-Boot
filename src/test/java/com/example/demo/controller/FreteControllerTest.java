@@ -49,7 +49,8 @@ public class FreteControllerTest {
 
         cliente = new Cliente();
         cliente.setNome("João");
-        cliente.setTelefone("11999999999");
+        cliente.setTelefone("(11) 91234-5678");
+        cliente.setEndereco("Rua das Flores, 123"); // <-- Adicionado para evitar erro de validação
         cliente = clienteRepository.save(cliente);
 
         cidade = new Cidade();
@@ -59,12 +60,15 @@ public class FreteControllerTest {
         cidade = cidadeRepository.save(cidade);
     }
 
+
     @Test
     public void deveCadastrarFreteComSucesso() {
         Frete frete = new Frete();
         frete.setPeso(2.0f);
         frete.setCliente(cliente);
         frete.setCidade(cidade);
+        frete.setDescricao("Entrega de livros");
+
 
         ResponseEntity<Frete> response = restTemplate.postForEntity(baseUrl, frete, Frete.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -76,8 +80,11 @@ public class FreteControllerTest {
     public void deveListarFretesPorCliente() {
         Frete frete = new Frete();
         frete.setPeso(2.0f);
+        frete.setValor(45.0f);
         frete.setCliente(cliente);
         frete.setCidade(cidade);
+        frete.setDescricao("Entrega de jogos de xbox 360");
+
         freteRepository.save(frete);
 
         String url = baseUrl + "/cliente/" + cliente.getCodigoCliente();
